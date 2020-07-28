@@ -52,28 +52,23 @@ public class OptimalStaticDistributedBST {
                 if (diff == 0) {
                     subtrees_cost[start][start] = 0;
                     allRoots[start][start] = start;
-                }
-                else if (diff == 1)        //2 Nodes
+                } else if (diff == 1)        //2 Nodes
                 {
                     /*
                     CaseAB:- A          CaseBA:- B
                               \                 /
                                B               A
                      */
-                    int costCaseAB= 2*nodeWeights[start][start+diff] + W[start+diff][start+diff]-nodeWeights[start][start+diff];
-                    int costCaseBA= 2*nodeWeights[start][start+diff] + W[start][start]-nodeWeights[start][start+diff];
-                    if(costCaseAB<=costCaseBA)
-                    {
-                        subtrees_cost[start][start+diff]=costCaseAB;
-                        allRoots[start][start+diff]=start;
+                    int costCaseAB = 2 * nodeWeights[start][start + diff] + W[start + diff][start + diff] - nodeWeights[start][start + diff];
+                    int costCaseBA = 2 * nodeWeights[start][start + diff] + W[start][start] - nodeWeights[start][start + diff];
+                    if (costCaseAB <= costCaseBA) {
+                        subtrees_cost[start][start + diff] = costCaseAB;
+                        allRoots[start][start + diff] = start;
+                    } else {
+                        subtrees_cost[start][start + diff] = costCaseBA;
+                        allRoots[start][start + diff] = start + diff;
                     }
-                    else
-                    {
-                        subtrees_cost[start][start+diff]=costCaseBA;
-                        allRoots[start][start+diff]=start+diff;
-                    }
-                }
-                else {
+                } else {
                     int min = Integer.MAX_VALUE;    //stores min cost till now
                     //I'=[start,root-1] && I"= [root+1,start+diff]
                     for (int root = start; root <= start + diff; root++)  //loop to find the best root
