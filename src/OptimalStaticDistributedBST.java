@@ -99,25 +99,41 @@ public class OptimalStaticDistributedBST {
         // return subtrees_cost[0][allNodes.length-1];
     }
 
+    //DFS printing, preorder printing
     public void printtree(Node[] allNodes, int[][] allRoots, int beg, int end) {
         if (beg > end) {
-            //  System.out.print(allNodes[allRoots[beg][end]].key);
+            System.out.print("null ");
             return;
         }
-//        if(beg<0 ||beg>=allNodes.length|| end<0 ||end>=allNodes.length)
-//        {
-//            return;
-//        }
         System.out.print(allNodes[allRoots[beg][end]].key + " ");
-        //if(allRoots[beg][end]!=beg) {
         printtree(allNodes, allRoots, beg, allRoots[beg][end] - 1);
-        // }
-        // if(allRoots[beg][end]!=allNodes.length);
-        //{
         printtree(allNodes, allRoots, allRoots[beg][end] + 1, end);
-        //}
     }
 
+    /*
+    Input:-
+    line 1: number of nodes in the input (say k)
+    line 2: increasing order of k nodes' keys
+    line 3-k:  k*k upper triangular matrix with matrix[a,b]=freq[a,b] and matrix[a,a]=0 for all 0<=a<k
+    eg input:
+    5
+    1 2 3 4 5
+    0 2 1 0 1
+    0 0 2 2 3
+    0 0 0 1 2
+    0 0 0 0 3
+    0 0 0 0 0
+    expected output:
+    1 null 2 null 4 3 null null 5 null null
+    corresponding tree:
+        1
+         \
+          2
+           \
+            4
+           / \
+          3   5
+     */
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         Node allNodes[] = new Node[s.nextInt()];
